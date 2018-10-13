@@ -4,14 +4,14 @@
 #
 Name     : perl-File-Remove
 Version  : 1.58
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-remove-perl/libfile-remove-perl_1.57-1.debian.tar.xz
 Summary  : 'Remove files and directories'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-File-Remove-license
+Requires: perl-File-Remove-license = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -65,13 +65,13 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-File-Remove
-cp LICENSE %{buildroot}/usr/share/doc/perl-File-Remove/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-File-Remove/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Remove
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Remove/LICENSE
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Remove/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -80,7 +80,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/File/Remove.pm
+/usr/lib/perl5/vendor_perl/5.26.1/File/Remove.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -88,5 +88,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/doc/perl-File-Remove/LICENSE
-/usr/share/doc/perl-File-Remove/deblicense_copyright
+/usr/share/package-licenses/perl-File-Remove/LICENSE
+/usr/share/package-licenses/perl-File-Remove/deblicense_copyright
