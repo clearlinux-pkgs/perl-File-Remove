@@ -4,11 +4,11 @@
 #
 Name     : perl-File-Remove
 Version  : 1.58
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-remove-perl/libfile-remove-perl_1.57-1.debian.tar.xz
-Summary  : 'Remove files and directories'
+Summary  : Remove files and directories
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-File-Remove-license = %{version}-%{release}
@@ -23,6 +23,7 @@ Remove files and directories
 Summary: dev components for the perl-File-Remove package.
 Group: Development
 Provides: perl-File-Remove-devel = %{version}-%{release}
+Requires: perl-File-Remove = %{version}-%{release}
 
 %description dev
 dev components for the perl-File-Remove package.
@@ -41,7 +42,7 @@ license components for the perl-File-Remove package.
 cd ..
 %setup -q -T -D -n File-Remove-1.58 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Remove-1.58/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Remove-1.58/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
