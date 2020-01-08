@@ -4,14 +4,15 @@
 #
 Name     : perl-File-Remove
 Version  : 1.58
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-remove-perl/libfile-remove-perl_1.57-1.debian.tar.xz
-Summary  : Remove files and directories
+Summary  : 'Remove files and directories'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-File-Remove-license = %{version}-%{release}
+Requires: perl-File-Remove-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -37,18 +38,28 @@ Group: Default
 license components for the perl-File-Remove package.
 
 
+%package perl
+Summary: perl components for the perl-File-Remove package.
+Group: Default
+Requires: perl-File-Remove = %{version}-%{release}
+
+%description perl
+perl components for the perl-File-Remove package.
+
+
 %prep
 %setup -q -n File-Remove-1.58
-cd ..
-%setup -q -T -D -n File-Remove-1.58 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libfile-remove-perl_1.57-1.debian.tar.xz
+cd %{_builddir}/File-Remove-1.58
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Remove-1.58/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/File-Remove-1.58/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -58,7 +69,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -67,8 +78,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Remove
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Remove/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Remove/deblicense_copyright
+cp %{_builddir}/File-Remove-1.58/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Remove/c01411e4535ce0aea0deda74411ac0f2f5158bcd
+cp %{_builddir}/File-Remove-1.58/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Remove/f426ec8af368f27f7a70de9c09e25b81dae8d8ac
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -81,7 +92,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/File/Remove.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -89,5 +99,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-File-Remove/LICENSE
-/usr/share/package-licenses/perl-File-Remove/deblicense_copyright
+/usr/share/package-licenses/perl-File-Remove/c01411e4535ce0aea0deda74411ac0f2f5158bcd
+/usr/share/package-licenses/perl-File-Remove/f426ec8af368f27f7a70de9c09e25b81dae8d8ac
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/File/Remove.pm
