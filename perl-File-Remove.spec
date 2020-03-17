@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Remove
 Version  : 1.58
-Release  : 14
+Release  : 15
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.58.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-remove-perl/libfile-remove-perl_1.57-1.debian.tar.xz
@@ -79,7 +79,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Remove
 cp %{_builddir}/File-Remove-1.58/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Remove/c01411e4535ce0aea0deda74411ac0f2f5158bcd
-cp %{_builddir}/File-Remove-1.58/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Remove/f426ec8af368f27f7a70de9c09e25b81dae8d8ac
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-File-Remove/f426ec8af368f27f7a70de9c09e25b81dae8d8ac
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -104,4 +104,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/File/Remove.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/Remove.pm
