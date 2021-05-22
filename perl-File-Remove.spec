@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Remove
 Version  : 1.60
-Release  : 20
+Release  : 21
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.60.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.60.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-remove-perl/libfile-remove-perl_1.57-1.debian.tar.xz
@@ -14,6 +14,7 @@ License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-File-Remove-license = %{version}-%{release}
 Requires: perl-File-Remove-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
+BuildRequires : perl(Module::Build)
 
 %description
 This archive contains the distribution File-Remove,
