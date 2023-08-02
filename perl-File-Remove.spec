@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Remove
 Version  : 1.61
-Release  : 29
+Release  : 30
 URL      : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.61.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/File-Remove-1.61.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-remove-perl/libfile-remove-perl_1.57-1.debian.tar.xz
